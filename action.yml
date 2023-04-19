@@ -67,8 +67,7 @@ runs:
           fi
           sudo tailscale up --authkey ${TAILSCALE_AUTHKEY} --hostname=${HOSTNAME} --accept-routes ${ADDITIONAL_ARGS}
       - name: Post Run Tailscale Logout
-        shell: bash
-        env:
-          HOSTNAME: ${{ inputs.hostname }}
-        run.post: |
-          sudo tailscale logout
+        uses: webiny/action-post-run@3.0.0
+        if: always()
+        with:
+          run: sudo tailscale logout
