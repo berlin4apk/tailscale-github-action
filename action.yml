@@ -66,3 +66,8 @@ runs:
             HOSTNAME="github-$(cat /etc/hostname)"
           fi
           sudo tailscale up --authkey ${TAILSCALE_AUTHKEY} --hostname=${HOSTNAME} --accept-routes ${ADDITIONAL_ARGS}
+      - name: Post Run Tailscale Logout
+        uses: webiny/action-post-run@3.0.0
+        if: always()
+        with:
+          run: sudo tailscale logout
