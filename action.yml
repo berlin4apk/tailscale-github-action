@@ -61,7 +61,7 @@ runs:
           ADDITIONAL_ARGS: ${{ inputs.args }}
           HOSTNAME: ${{ inputs.hostname }}
         run: |
-          sudo tailscaled 2>~/tailscaled.log &
+          sudo tailscaled -state=mem: 2>~/tailscaled.log &
           if [ -z "${HOSTNAME}" ]; then
             HOSTNAME="github-$(cat /etc/hostname)"
           fi
